@@ -1,0 +1,57 @@
+{% extends "menu.html" %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {{Menu}} {% endblock %}</title>
+    {% load static %}
+    <!-- Bootstrap -->
+
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'bootstrap/css/bootstrap.min.js' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static '/font-awesome/css/font-awesome.min.css' %}">
+</head>
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header" data-background-color="blue">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active " aria-current="page">{{ Menu }}</li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="container">
+                <div class="card-content table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <caption>Lista de clientes</caption>
+                        <thead class="thead-dark">
+                            <th scope="col" class="text-center">ID</th>
+                            <th scope="col" class="text-center">Cliente</th>
+                            <th scope="col" class="text-center">Producto</th>
+                            <th scope="col" class="text-center">Total</th>
+
+                        </thead>
+                        {% for c in ventas %}
+                        <tr>
+                            <th scope="row" class="text-center">{{ c.id }}</th>
+                            <td class="text-center">{{ c.factura__cliente__nombre }}</td>
+                            <td class="text-center">{{ c.producto__descripcion }}</td>
+                            <td class="text-center">{{c.factura__total}}</td>
+
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}

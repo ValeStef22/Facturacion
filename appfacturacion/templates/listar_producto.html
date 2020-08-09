@@ -1,0 +1,84 @@
+{% extends "menu.html" %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {{Menu}} {% endblock %}</title>
+    {% load static %}
+    <!-- Bootstrap -->
+
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'bootstrap/css/bootstrap.min.js' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static '/font-awesome/css/font-awesome.min.css' %}">
+</head>
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header" data-background-color="blue">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active " aria-current="page">{{ Menu }}</li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="container">
+                <div class="card-content table-responsive">
+                    <div class="row justify-content-end">
+                        <a href="{% url 'guardarproducto' %}" class="btn btn-primary"
+                            style="margin: 5px; margin-right:18px"><b>Nuevo Producto</b></a>
+                    </div>
+                    <table class="table table-bordered table-hover">
+                        <caption>Lista de productos</caption>
+                        <thead class="thead-dark">
+                            <th scope="col" class="text-center">ID</th>
+                            <th scope="col" class="text-center">Descripcion</th>
+                            <th scope="col" class="text-center">Precio</th>
+                            <th scope="col" class="text-center">Stock</th>
+                            <th scope="col" class="text-center">iva</th>
+                            <th scope="col" class="text-center">Accion</th>
+                        </thead>
+                        {% for c in productos %}
+                        <tr>
+                            <th scope="row" class="text-center">{{ c.id }}</th>
+                            <td class="text-center">{{ c.descripcion }}</td>
+                            <td class="text-center">{{ c.precio }}</td>
+                            <td class="text-center">{{c.stock}}</td>
+                            <td class="text-center">{{ c.iva }}</td>
+                            <td style="width:230px" class="text-center">
+                                <a href="{% url 'editarproducto' c.id %}" class="btn btn-warning btn-xs">
+                                    <span class='fa fa-edit'>&nbsp;Editar</span>
+                                </a>
+                                <a href="{% url 'eliminarproducto' c.id %}" class="btn btn-danger btn-xs"
+                                    onclick="return confirm('¿Estas seguro de eliminar el registro?')">
+                                    <span class='fa fa-trash-o text-dark'>&nbsp;Eliminar</span>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
